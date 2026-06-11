@@ -1,9 +1,22 @@
+import React from "react";
 import { BatteryCharging, Check, Cpu, GitCompare, Heart, Search, ShieldCheck, ShoppingCart } from "lucide-react";
 import { categories } from "../data.js";
 import { money } from "../utils/format.js";
 import { SectionHeader } from "./ui.jsx";
 
-export function CatalogSection({ query, category, productsToShow, setQuery, setCategory, productActions }) {
+export function CatalogSection({
+  query,
+  category,
+  productsToShow,
+  setQuery,
+  setCategory,
+  productActions,
+  controls,
+  emptyTitle = "No phones matched your filters.",
+  emptyText = "Try widening your budget, changing the condition, or clearing one filter.",
+  resultLabel,
+  viewMode = "grid",
+}) {
   return (
     <>
       <section className="search-band" aria-label="Product search">
@@ -30,29 +43,39 @@ export function CatalogSection({ query, category, productsToShow, setQuery, setC
           title="Every listing sells the phone and explains the deal."
           text="Fast filters, honest conditions, visible warranty, stock urgency, and inspection receipts make each product card work harder."
         />
-        <div className="product-grid">
-          {productsToShow.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              wished={productActions.wishlist.includes(product.id)}
-              compared={productActions.compare.some((item) => item.id === product.id)}
-              onAdd={() => productActions.addToCart(product)}
-              onCompare={() => productActions.toggleCompare(product)}
-              onWish={() => productActions.toggleWishlist(product.id)}
-              onOpen={() => productActions.navigate(`/product/${product.id}`)}
-            />
-          ))}
-        </div>
+        {controls}
+        {resultLabel && <p className="result-label">{resultLabel}</p>}
+        {productsToShow.length > 0 ? (
+          <div className={viewMode === "list" ? "product-grid list-view" : "product-grid"}>
+            {productsToShow.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                viewMode={viewMode}
+                wished={productActions.wishlist.includes(product.id)}
+                compared={productActions.compare.some((item) => item.id === product.id)}
+                onAdd={() => productActions.addToCart(product)}
+                onCompare={() => productActions.toggleCompare(product)}
+                onWish={() => productActions.toggleWishlist(product.id)}
+                onOpen={() => productActions.navigate(`/product/${product.id}`)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="catalog-empty">
+            <h3>{emptyTitle}</h3>
+            <p>{emptyText}</p>
+          </div>
+        )}
       </section>
     </>
   );
 }
 
-export function ProductCard({ product, wished, compared, onAdd, onCompare, onWish, onOpen }) {
+export function ProductCard({ product, viewMode = "grid", wished, compared, onAdd, onCompare, onWish, onOpen }) {
   const urgency = product.stock <= 6 ? "low" : "ok";
   return (
-    <article className="product-card">
+    <article className={viewMode === "list" ? "product-card list-card" : "product-card"}>
       <button className="product-media product-link" type="button" onClick={onOpen}>
         <img src={product.image} alt={`${product.name} ${product.color}`} />
         <span className={`badge ${product.category.toLowerCase()}`}>{product.category}</span>

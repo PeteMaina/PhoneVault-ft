@@ -1,3 +1,4 @@
+import React from "react";
 import { money } from "../utils/format.js";
 
 export function CompareTable({ items }) {

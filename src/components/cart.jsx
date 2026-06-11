@@ -1,3 +1,4 @@
+import React from "react";
 import { Minus, PackageCheck, X, Zap } from "lucide-react";
 import { money } from "../utils/format.js";
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { Menu, ShoppingCart, Smartphone } from "lucide-react";
 
 const links = [

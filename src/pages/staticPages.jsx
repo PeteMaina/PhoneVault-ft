@@ -1,3 +1,4 @@
+import React from "react";
 import { CartContents } from "../components/cart.jsx";
 import { CompareTable } from "../components/compare.jsx";
 import { FaqSection, TrustSection } from "../components/sections.jsx";

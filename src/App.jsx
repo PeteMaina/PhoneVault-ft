@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { products } from "./data.js";
 import { CartDrawer } from "./components/cart.jsx";
 import { useRoute } from "./hooks/useRoute.js";

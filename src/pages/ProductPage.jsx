@@ -1,3 +1,4 @@
+import React from "react";
 import { Check, GitCompare, Heart, ShoppingCart } from "lucide-react";
 import { DetailItem } from "../components/ui.jsx";
 import { money } from "../utils/format.js";

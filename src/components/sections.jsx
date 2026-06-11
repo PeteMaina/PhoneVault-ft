@@ -1,3 +1,4 @@
+import React from "react";
 import { ChevronDown, CircleDollarSign, ClipboardCheck, ShieldCheck, Truck } from "lucide-react";
 import { faqs } from "../data.js";
 import { SectionHeader } from "./ui.jsx";

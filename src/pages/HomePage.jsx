@@ -1,3 +1,4 @@
+import React from "react";
 import { Sparkles } from "lucide-react";
 import { products } from "../data.js";
 import { CatalogSection } from "../components/catalog.jsx";
